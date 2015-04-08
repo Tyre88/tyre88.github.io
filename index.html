@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <script src="jQuery.js"></script>
+    <script src="pongstagr.am.min.js"></script>
+    <script src="bootstrap.min.js"></script>
+    <link rel="stylesheet" href="bootstrap.min.css"/>
+    <link rel="stylesheet" href="pongstagr.am.min.css"/>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <h1>TEST INSTAGRAM</h1>
+    <div id="data"></div>
+</body>
+<script>
+    function callbackFunction(test)
+    {
+        debugger;
+        console.log(test);
+    }
+
+    $(document).ready(function () {
+        var token = "";
+        var id = "";
+        if(window.location.hash)
+        {
+            token = window.location.hash.substring(1).replace("access_token=", "");
+            id = token.substring(0, token.indexOf('.'));
+        }
+
+
+
+        $.ajax(
+        {
+            type: "GET",
+            dataType: "jsonp",
+            cache: false,
+            url: "https://api.instagram.com/v1/users/self/media/liked?access_token=" + token,
+            success: function(data)
+            {
+
+            }
+        });
+
+        $.ajax(
+        {
+            type: "POST",
+            dataType: "json",
+            url: "https://api.instagram.com/v1/media/958671324439392567_1507336035/likes?access_token=" + token,
+            success: function(data)
+            {
+                $('#data').pongstgrm({
+                    accessId: id,
+                    accessToken: token,
+                    show: 'liked'
+                });
+            }
+        });
+    });
+</script>
+</html>
