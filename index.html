@@ -47,7 +47,8 @@
         {
             type: "POST",
             dataType: "json",
-            url: "https://api.instagram.com/v1/media/958671324439392567_1507336035/likes?access_token=" + token,
+            url: "https://api.instagram.com/v1/media/958671324439392567_1507336035/likes",
+            data: {access_token: token},
             success: function(data)
             {
                 $('#data').pongstgrm({
