@@ -17,7 +17,9 @@
                 {{Question.Name}}
             </div>
             <div class="progress">
-                <md-progress-linear class="md-accent" md-mode="determinate" value="{{Question.TimeLeftPercentage}}"></md-progress-linear>
+                <md-progress-linear class="md-accent" md-mode="determinate"
+                                    value="{{Question.TimeLeftPercentage}}"
+                        ng-class="{'hurry': Question.TimeLeft < 5}"></md-progress-linear>
             </div>
             <md-grid-list md-cols="2" md-row-height="16:8" md-gutter="5px" id="question-container"
                     ng-class="{'rotate': Rotate, 'game-over': GameService.GameOver, 'win': GameService.Win}">

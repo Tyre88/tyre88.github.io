@@ -3,8 +3,8 @@
         "Name": "Vilket land grundades Samsung i?",
         "Id": 1,
         "CorrectAnswerId": 3,
-        "StartTime": 30.0,
-        "TimeLeft": 30.0,
+        "StartTime": 20.0,
+        "TimeLeft": 20.0,
         "TimeLeftPercentage": 100,
         "Options": [
             {
@@ -29,8 +29,8 @@
         "Name": "Vilket år grundades Samsung?",
         "Id": 2,
         "CorrectAnswerId": 1,
-        "StartTime": 30.0,
-        "TimeLeft": 30.0,
+        "StartTime": 15.0,
+        "TimeLeft": 15.0,
         "TimeLeftPercentage": 100,
         "Options": [
             {
@@ -55,8 +55,8 @@
         "Name": "Vad heter Samsungs nästa mobila flaggskepp?",
         "Id": 3,
         "CorrectAnswerId": 4,
-        "StartTime": 30.0,
-        "TimeLeft": 30.0,
+        "StartTime": 5.0,
+        "TimeLeft": 5.0,
         "TimeLeftPercentage": 100,
         "Options": [
             {
@@ -81,8 +81,8 @@
         "Name": "Hur många anställda har Samsung?",
         "Id": 4,
         "CorrectAnswerId": 2,
-        "StartTime": 30.0,
-        "TimeLeft": 30.0,
+        "StartTime": 10.0,
+        "TimeLeft": 10.0,
         "TimeLeftPercentage": 100,
         "Options": [
             {
