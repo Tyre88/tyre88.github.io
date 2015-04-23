@@ -1,0 +1,36 @@
+md-grid-tile
+{
+	background-color: red;
+}
+
+md-grid-tile:hover
+{
+	cursor: pointer;
+}
+
+.container
+{
+	margin: 0 auto;
+	max-width: 500px;
+}
+
+.question
+{
+	text-align: center;
+}
+
+.progress
+{
+	height: 20px;
+}
+
+.information
+{
+	display: flex;
+}
+
+.information > span
+{
+	width: 50%;
+	display: inline-block;
+}
