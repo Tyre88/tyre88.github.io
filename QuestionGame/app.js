@@ -1,5 +1,11 @@
 angular.module('question-game', ['ng', 'ngMaterial'])
-	.service('gameService', ["$http", function($http)
+    .config(function($mdThemingProvider)
+    {
+        $mdThemingProvider.theme('default')
+            .primaryPalette('light-blue')
+            .accentPalette('blue');
+    })
+	.service('gameService', ["$http", "$q", function($http, $q)
 	{
 		this.Score = 0;
 		this.MaxLives = 3;
@@ -9,21 +15,57 @@ angular.module('question-game', ['ng', 'ngMaterial'])
 		this.DefaultScore = 30;
 		this.GameOver = false;
 
-        this.SaveQuestion = function(question)
+        this.GetQuestion = function(id)
         {
-            $http.post("localhost:90/questiongame/question/", question)
+            var deferred = $q.defer();
+
+            $http.get("questions.json").success(function(data)
+            {
+                if(data)
+                {
+                    for(var i = 0; i < data.length; i++)
+                    {
+                        if(data[i].Id == id)
+                        {
+                            deferred.resolve(data[i]);
+                            break;
+                        }
+                    }
+                }
+                else
+                    deferred.reject();
+            });
+
+            return deferred.promise;
         };
 	}])
 	.controller('game', ["$scope", "$interval", "gameService", function($scope, $interval, gameService)
 	{
 		$scope.GameService = gameService;
+        $scope.Rotate = false;
 
 		$scope.Answer = function(id)
 		{
 			if(id == $scope.Question.CorrectAnswerId)
 			{
 				gameService.Score += Math.floor((gameService.DefaultScore * $scope.Question.TimeLeftPercentage));
+                gameService.QuestionsAnswered++;
                 $interval.cancel($scope.Interval);
+                $scope.Rotate = true;
+
+                setTimeout(function()
+                {
+                    gameService.GetQuestion(gameService.QuestionsAnswered + 1).then(function(data)
+                    {
+                        $scope.Question = data;
+                        $scope.Rotate = false;
+                        setTimeout(function()
+                        {
+                            $scope.Interval = $interval($scope.IntervalFunction, 10, 0, true);
+                        }, 500);
+
+                    });
+                }, 1500);
 			}
 			else
 			{
@@ -69,5 +111,10 @@ angular.module('question-game', ['ng', 'ngMaterial'])
 					Id: 4
 				}
 			]
-		}
+		};
+
+        gameService.GetQuestion(gameService.QuestionsAnswered + 1).then(function(data)
+        {
+            $scope.Question = data;
+        });
 	}]);

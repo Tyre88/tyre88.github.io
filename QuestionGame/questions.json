@@ -1,0 +1,54 @@
+[
+    {
+        "Name": "Vilket land grundades Samsung i?",
+        "Id": 1,
+        "CorrectAnswerId": 3,
+        "StartTime": 30.0,
+        "TimeLeft": 30.0,
+        "TimeLeftPercentage": 100,
+        "Options": [
+            {
+                "Text": "Kina",
+                "Id": 1
+            },
+            {
+                "Text": "Nord Korea",
+                "Id": 2
+            },
+            {
+                "Text": "Syd Korea",
+                "Id": 3
+            },
+            {
+                "Text": "Japan",
+                "Id": 4
+            }
+        ]
+    },
+    {
+        "Name": "Vilket år grundades Samsung?",
+        "Id": 2,
+        "CorrectAnswerId": 1,
+        "StartTime": 30.0,
+        "TimeLeft": 30.0,
+        "TimeLeftPercentage": 100,
+        "Options": [
+            {
+                "Text": "1938",
+                "Id": 1
+            },
+            {
+                "Text": "1944",
+                "Id": 2
+            },
+            {
+                "Text": "1932",
+                "Id": 3
+            },
+            {
+                "Text": "1955",
+                "Id": 4
+            }
+        ]
+    }
+]

@@ -1,6 +1,8 @@
 md-grid-tile
 {
-	background-color: red;
+	background-color: #01579b;
+    font-weight: bold;
+    color: white;
 }
 
 md-grid-tile:hover
@@ -34,4 +36,25 @@ md-grid-tile:hover
 {
 	width: 50%;
 	display: inline-block;
+}
+
+#question-container
+{
+    transition: transform 500ms;
+}
+
+.rotate
+{
+    transform: rotateX(180deg);
+    position: relative;
+}
+
+.rotate:before
+{
+    content: '';
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: 2;
+    background-color: #01579b;
 }
