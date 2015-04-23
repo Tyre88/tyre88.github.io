@@ -52,6 +52,8 @@ md-grid-tile:hover
 .game-over, .win
 {
     position: relative;
+    transform: rotateX(0deg);
+    transition: transform 0ms !important;
 }
 
 .rotate:before, .game-over:before, .win:before

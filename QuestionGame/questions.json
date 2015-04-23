@@ -50,5 +50,57 @@
                 "Id": 4
             }
         ]
+    },
+    {
+        "Name": "Vad heter Samsungs nästa mobila flaggskepp?",
+        "Id": 3,
+        "CorrectAnswerId": 4,
+        "StartTime": 30.0,
+        "TimeLeft": 30.0,
+        "TimeLeftPercentage": 100,
+        "Options": [
+            {
+                "Text": "Galaxy S4",
+                "Id": 1
+            },
+            {
+                "Text": "Galaxy S7",
+                "Id": 2
+            },
+            {
+                "Text": "Galaxy S5",
+                "Id": 3
+            },
+            {
+                "Text": "Galaxy S6",
+                "Id": 4
+            }
+        ]
+    },
+    {
+        "Name": "Hur många anställda har Samsung?",
+        "Id": 4,
+        "CorrectAnswerId": 2,
+        "StartTime": 30.0,
+        "TimeLeft": 30.0,
+        "TimeLeftPercentage": 100,
+        "Options": [
+            {
+                "Text": "200K",
+                "Id": 1
+            },
+            {
+                "Text": "275K",
+                "Id": 2
+            },
+            {
+                "Text": "283K",
+                "Id": 3
+            },
+            {
+                "Text": "172K",
+                "Id": 4
+            }
+        ]
     }
 ]

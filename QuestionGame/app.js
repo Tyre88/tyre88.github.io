@@ -32,6 +32,8 @@ angular.module('question-game', ['ng', 'ngMaterial'])
                             break;
                         }
                     }
+
+                    deferred.reject(true);
                 }
                 else
                     deferred.reject();
@@ -50,23 +52,7 @@ angular.module('question-game', ['ng', 'ngMaterial'])
 			if(id == $scope.Question.CorrectAnswerId)
 			{
 				gameService.Score += Math.floor((gameService.DefaultScore * $scope.Question.TimeLeftPercentage));
-                gameService.QuestionsAnswered++;
-                $interval.cancel($scope.Interval);
-                $scope.Rotate = true;
-
-                setTimeout(function()
-                {
-                    gameService.GetQuestion(gameService.QuestionsAnswered + 1).then(function(data)
-                    {
-                        $scope.Question = data;
-                        $scope.Rotate = false;
-                        setTimeout(function()
-                        {
-                            $scope.Interval = $interval($scope.IntervalFunction, 10, 0, true);
-                        }, 500);
-
-                    });
-                }, 1500);
+                $scope.NextQuestion();
 			}
 			else
 			{
@@ -76,8 +62,40 @@ angular.module('question-game', ['ng', 'ngMaterial'])
                 {
                     $scope.GameOver();
                 }
+                else
+                    $scope.NextQuestion();
 			}
 		};
+
+        $scope.NextQuestion = function()
+        {
+            $interval.cancel($scope.Interval);
+            $scope.Rotate = true;
+
+            gameService.QuestionsAnswered++;
+            setTimeout(function()
+            {
+                gameService.GetQuestion(gameService.QuestionsAnswered + 1).then(function(data)
+                {
+                    console.log(data);
+                    if(data)
+                    {
+                        $scope.Question = data;
+                        $scope.Rotate = false;
+                        setTimeout(function()
+                        {
+                            $scope.Interval = $interval($scope.IntervalFunction, 10, 0, true);
+                        }, 500);
+                    }
+                }, function(win)
+                {
+                    if(win)
+                    {
+                        gameService.Win = true;
+                    }
+                });
+            }, 1500);
+        };
 
         $scope.IntervalFunction = function()
         {
