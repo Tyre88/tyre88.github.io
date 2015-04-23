@@ -85,9 +85,18 @@ md-grid-tile:hover
     animation-name: blink;
     animation-duration: 0.5s;
     animation-iteration-count: infinite;
+    -webkit-animation-name: blink;
+    -webkit-animation-duration: 0.5s;
+    -webkit-animation-iteration-count: infinite;
 }
 
 @keyframes blink
+{
+    0% { background-color: red; }
+    50% { background-color: yellow }
+}
+
+@-webkit-keyframes blink
 {
     0% { background-color: red; }
     50% { background-color: yellow }
