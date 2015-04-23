@@ -1,5 +1,5 @@
 angular.module('question-game', ['ng', 'ngMaterial'])
-	.service('gameService', function()
+	.service('gameService', ["$http", function($http)
 	{
 		this.Score = 0;
 		this.MaxLives = 3;
@@ -8,7 +8,12 @@ angular.module('question-game', ['ng', 'ngMaterial'])
 		this.QuestionsAnswered = 0;
 		this.DefaultScore = 30;
 		this.GameOver = false;
-	})
+
+        this.SaveQuestion = function(question)
+        {
+            $http.post("localhost:90/questiongame/question/", question)
+        };
+	}])
 	.controller('game', ["$scope", "$interval", "gameService", function($scope, $interval, gameService)
 	{
 		$scope.GameService = gameService;
@@ -18,6 +23,7 @@ angular.module('question-game', ['ng', 'ngMaterial'])
 			if(id == $scope.Question.CorrectAnswerId)
 			{
 				gameService.Score += Math.floor((gameService.DefaultScore * $scope.Question.TimeLeftPercentage));
+                $interval.cancel($scope.Interval);
 			}
 			else
 			{
@@ -25,16 +31,19 @@ angular.module('question-game', ['ng', 'ngMaterial'])
 			}
 		};
 
-		$scope.Interval = $interval(function() {
-			$scope.Question.TimeLeft -= 0.01;
-			$scope.Question.TimeLeftPercentage = ($scope.Question.TimeLeft / $scope.Question.StartTime) * 100;
+        $scope.IntervalFunction = function()
+        {
+            $scope.Question.TimeLeft -= 0.01;
+            $scope.Question.TimeLeftPercentage = ($scope.Question.TimeLeft / $scope.Question.StartTime) * 100;
 
-			if($scope.Question.TimeLeftPercentage <= 50)
-			{
-				$interval.cancel($scope.Interval);
-				gameService.GameOver = true;
-			}
-		}, 10, 0, true);
+            if($scope.Question.TimeLeftPercentage <= 50)
+            {
+                $interval.cancel($scope.Interval);
+                gameService.GameOver = true;
+            }
+        };
+
+		$scope.Interval = $interval($scope.IntervalFunction, 10, 0, true);
 
 		$scope.Question = {
 			Name: "Vad heter sveriges kung?",
