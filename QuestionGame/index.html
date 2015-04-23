@@ -20,7 +20,7 @@
                 <md-progress-linear class="md-accent" md-mode="determinate" value="{{Question.TimeLeftPercentage}}"></md-progress-linear>
             </div>
             <md-grid-list md-cols="2" md-row-height="16:8" md-gutter="5px" id="question-container"
-                    ng-class="{'rotate': Rotate}">
+                    ng-class="{'rotate': Rotate, 'game-over': GameService.GameOver}">
                 <md-grid-tile class="md-accent" md-colspan="1" ng-repeat="option in Question.Options" ng-click="Answer(option.Id)">{{option.Text}}</md-grid-tile>
             </md-grid-list>
 

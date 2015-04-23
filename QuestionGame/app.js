@@ -14,6 +14,7 @@ angular.module('question-game', ['ng', 'ngMaterial'])
 		this.QuestionsAnswered = 0;
 		this.DefaultScore = 30;
 		this.GameOver = false;
+        this.Win = false;
 
         this.GetQuestion = function(id)
         {
@@ -70,6 +71,11 @@ angular.module('question-game', ['ng', 'ngMaterial'])
 			else
 			{
 				gameService.Lives--;
+
+                if(gameService.Lives <= 0)
+                {
+                    $scope.GameOver();
+                }
 			}
 		};
 
@@ -78,14 +84,19 @@ angular.module('question-game', ['ng', 'ngMaterial'])
             $scope.Question.TimeLeft -= 0.01;
             $scope.Question.TimeLeftPercentage = ($scope.Question.TimeLeft / $scope.Question.StartTime) * 100;
 
-            if($scope.Question.TimeLeftPercentage <= 50)
+            if($scope.Question.TimeLeftPercentage <= 0)
             {
-                $interval.cancel($scope.Interval);
-                gameService.GameOver = true;
+                $scope.GameOver();
             }
         };
 
 		$scope.Interval = $interval($scope.IntervalFunction, 10, 0, true);
+
+        $scope.GameOver = function()
+        {
+            $interval.cancel($scope.Interval);
+            gameService.GameOver = true;
+        };
 
 		$scope.Question = {
 			Name: "Vad heter sveriges kung?",

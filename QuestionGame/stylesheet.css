@@ -49,12 +49,29 @@ md-grid-tile:hover
     position: relative;
 }
 
-.rotate:before
+.game-over, .win
+{
+    position: relative;
+}
+
+.rotate:before, .game-over:before, .win:before
 {
     content: '';
     width: 100%;
     height: 100%;
+    line-height: 250px;
+    text-align: center;
     position: absolute;
     z-index: 2;
     background-color: #01579b;
+}
+
+.game-over:before
+{
+    content: 'Game over';
+}
+
+.win:before
+{
+    content: 'You WIN!';
 }
