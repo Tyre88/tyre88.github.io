@@ -79,7 +79,7 @@ angular.module('push').controller('index', ["$scope", "$window", function($scope
 
 	if('serviceWorker' in navigator)
 	{
-		navigator.serviceWorker.register('service-worker.js').then(initialiseState);
+		navigator.serviceWorker.register('service-worker.js').then($scope.InitializeState);
 	}
 	else
 	{
