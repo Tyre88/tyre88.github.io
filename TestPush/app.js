@@ -18,22 +18,26 @@ angular.module('push').controller('index', ["$scope", "$window", function($scope
 
 	$scope.Subscribe = function ()
 	{
-		subscribe().then(function(subscription)
+		navigator.serviceWorker.ready.then(function(serviceWorkerRegistration)
 		{
-			$scope.isPushEnabled = true;
+			serviceWorkerRegistration.pushManager.subscribe({userVisibleOnly: true})
+				.then(function(subscription)
+				{
+					$scope.isPushEnabled = true;
 
-			return sendSubscriptionToServer(subscription);
+					//return sendSubscriptionToServer(subscription);
+				})
+				.catch(function(err)
+				{
+					if (Notification.permission === 'denied') {
+						window.Demo.debug.log('Permission for Notifications was denied');
+					}
+					else
+					{
+						window.Demo.debug.log('Unable to subscribe to push.', err);
+					}
+				});
 		})
-		.catch(function(err)
-		{
-			if (Notification.permission === 'denied') {
-				window.Demo.debug.log('Permission for Notifications was denied');
-			}
-			else
-			{
-				window.Demo.debug.log('Unable to subscribe to push.', err);
-			}
-		});
 	};
 
 	$scope.Unsubscribe = function()
@@ -69,7 +73,7 @@ angular.module('push').controller('index', ["$scope", "$window", function($scope
 					if(!subscription)
 						return;
 
-					sendSubscriptionToServer(subscription);
+					//sendSubscriptionToServer(subscription);
 				})
 		}).catch(function(err)
 		{

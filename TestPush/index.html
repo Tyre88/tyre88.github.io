@@ -12,7 +12,7 @@
 </head>
 <body ng-app="push">
     <md-content ng-controller="index">
-        <md-switch ng-model="isPushEnabled" aria-label="Push">
+        <md-switch ng-model="isPushEnabled" ng-click="Subscribe()" aria-label="Push">
             Enable push notifications
         </md-switch>
     </md-content>
