@@ -4,7 +4,7 @@ angular.module('push').service('sendPush', ["$http", function($http)
 {
 	this.SendNotification = function(subscriptionId)
 	{
-		$http.post("https://android.googleapis.com/gcm/send", {registration_ids: [subscriptionId]}, {
+		$http.post("https://android.googleapis.com/gcm/send", {registration_ids: subscriptionId}, {
 			headers:
 			{
 				'Access-Control-Allow-Origin': '*',
