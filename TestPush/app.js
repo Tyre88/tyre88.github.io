@@ -1,8 +1,23 @@
 angular.module('push', ["ng", "ngMaterial"]);
 
-angular.module('push').controller('index', ["$scope", "$window", function($scope, $window)
+angular.module('push').service('sendPush', ["$http", function($http)
+{
+	this.SendNotification = function(subscriptionId)
+	{
+		$http.post("https://android.googleapis.com/gcm/send", {registration_ids: [subscriptionId]}, {
+			headers:
+			{
+				'Authorization': "key=AIzaSyC1A1n6Lpj0hcnZON0rZ-SaLmJx4KyL6o8",
+				'Content-Type': 'application/json'
+			}
+		})
+	};
+}]);
+
+angular.module('push').controller('index', ["$scope", "sendPush", function($scope, sendPush)
 {
 	$scope.isPushEnabled = false;
+	$scope.SubscriptionId = "";
 
 	$scope.TogglePush = function()
 	{
@@ -16,6 +31,11 @@ angular.module('push').controller('index', ["$scope", "$window", function($scope
 		}
 	};
 
+	$scope.SendNotification = function()
+	{
+		sendPush.SendNotification($scope.SubscriptionId);
+	};
+
 	$scope.Subscribe = function ()
 	{
 		navigator.serviceWorker.ready.then(function(serviceWorkerRegistration)
@@ -24,6 +44,7 @@ angular.module('push').controller('index', ["$scope", "$window", function($scope
 				.then(function(subscription)
 				{
 					$scope.isPushEnabled = true;
+					$scope.SubscriptionId = subscription.subscriptionId;
 
 					//return sendSubscriptionToServer(subscription);
 				})
