@@ -7,6 +7,7 @@ angular.module('push').service('sendPush', ["$http", function($http)
 		$http.post("https://android.googleapis.com/gcm/send", {registration_ids: [subscriptionId]}, {
 			headers:
 			{
+				'Access-Control-Allow-Origin': '*',
 				'Authorization': "key=AIzaSyC1A1n6Lpj0hcnZON0rZ-SaLmJx4KyL6o8",
 				'Content-Type': 'application/json'
 			}
