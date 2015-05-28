@@ -4,14 +4,30 @@ angular.module('push').service('sendPush', ["$http", function($http)
 {
 	this.SendNotification = function(subscriptionId)
 	{
-		$http.post("https://android.googleapis.com/gcm/send", {registration_ids: subscriptionId}, {
-			headers:
+		/*$http.get("https://android.googleapis.com/gcm/send", {registration_ids: subscriptionId}, {
+			'headers':
 			{
 				'Access-Control-Allow-Origin': '*',
+				'Access-Control-Allow-Methods': 'POST, GET, OPTIONS, PUT',
 				'Authorization': "key=AIzaSyC1A1n6Lpj0hcnZON0rZ-SaLmJx4KyL6o8",
-				'Content-Type': 'application/json'
+				'Content-Type': 'application/json',
+				'Accept': 'application/json'
 			}
-		})
+		});*/
+
+		$http.get('http://83.254.234.1/push/index.php?registration_id=' + subscriptionId);
+
+		/*$http(
+			{
+				method: "POST",
+				url: "http://192.168.0.12/push/index.php",
+				headers:
+				{
+					'Content-Type': 'application/json'
+				},
+				data: {registration_id: subscriptionId}
+			}
+		);*/
 	};
 }]);
 
