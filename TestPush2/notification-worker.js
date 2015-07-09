@@ -25,13 +25,13 @@ self.addEventListener('notificationclick', function(event) {
             for(var i = 0; i < clientList.length; i++)
             {
                 var client = clientList[i];
-                if(client.url == '/' && 'focus' in client)
+                if(client.url == '/TestPush2/' && 'focus' in client)
                     return client.focus();
             }
 
             if(clients.openWindow)
             {
-                return clients.openWindow('/');
+                return clients.openWindow('/TestPush2/');
             }
         })
     )
