@@ -6,6 +6,9 @@
     var icon = '/images/icon-192x192.png';
     var tag = 'simple-push-demo-notification-tag';
 
+    if(event.data != null)
+        body = JSON.stringify(event.data);
+
     if(event.data != null && event.data.title != null)
         title = event.data.title;
 
