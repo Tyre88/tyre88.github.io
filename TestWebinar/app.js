@@ -15,4 +15,13 @@
     }, function(error) {
         console.log("error", error.code);
     });
+
+    video.addEventListener('play', function() {
+        draw(this, context, 400, 300);
+    });
+
+    function draw(video, context, width, height) {
+        context.drawImage(video, 0, 0, width, height);
+        setTimeout(draw, 16, video, context, width, height);
+    }
 }());
