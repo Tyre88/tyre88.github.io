@@ -22,6 +22,7 @@
 
     function draw(video, context, width, height) {
         context.drawImage(video, 0, 0, width, height);
-        setTimeout(draw, 16, video, context, width, height);
+        //Max 30FPS
+        setTimeout(draw, 32, video, context, width, height);
     }
 }());
