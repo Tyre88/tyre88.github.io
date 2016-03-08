@@ -9,6 +9,14 @@ decoder.play();
 /*  Without visible select menu
  decoder.buildSelectMenu(document.createElement('select'), 'environment|back').init(arg).play();
  */
+
+
+
 $('select').on('change', function(){
     decoder.stop().play();
+});
+
+$('#test').on('click', function() {
+    var url = decoder.getLastImageSrc();
+    decoder.decodeLocalImage(url);
 });
