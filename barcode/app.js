@@ -6,10 +6,4 @@ var arg = {
         document.querySelector('body').appendChild(aChild);
     }
 };
-new WebCodeCamJS("canvas").init(arg).play();
-
-var decoder = new WebCodeCamJS('#webcodecam-canvas');
-
-var decoder = $("#webcodecam-canvas").WebCodeCamJQuery(args).data().plugin_WebCodeCamJQuery;
-
-decoder.buildSelectMenu('#camera-select', 'environment|back').init(args);
+new WebCodeCamJS("canvas", 'environment|back').init(arg).play();
