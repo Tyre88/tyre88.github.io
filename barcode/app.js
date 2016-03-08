@@ -1,4 +1,6 @@
 var arg = {
+    decoderWorker: 'js/DecoderWorker.js',
+    DecodeBarCodeRate: 5,
     resultFunction: function(result) {
         $('body').append($('<li>' + result.format + ': ' + result.code + '</li>'));
     }
