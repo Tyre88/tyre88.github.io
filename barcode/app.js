@@ -1,9 +1,12 @@
-var txt = "innerText" in HTMLElement.prototype ? "innerText" : "textContent";
 var arg = {
     resultFunction: function(result) {
-        var aChild = document.createElement('li');
-        aChild[txt] = result.format + ': ' + result.code;
-        document.querySelector('body').appendChild(aChild);
+        $('body').append($('<li>' + result.format + ': ' + result.code + '</li>'));
     }
 };
-new WebCodeCamJS("canvas", 'environment|back').init(arg).play();
+var decoder = $("canvas").WebCodeCamJQuery(arg).data().plugin_WebCodeCamJQuery.play();
+
+function decodeLocalImage(){
+    decoder.decodeLocalImage();
+}
+
+decoder.buildSelectMenu('#camera-select', 'environment|back').init(arg);
