@@ -6,15 +6,17 @@
     <title>Title</title>
 </head>
 <body>
-    <video id="vid" src="video.mp4" type="video/mp4" controls></video>
+<script>
+    function Videoplay() {
+        var video = document.getElementById("vid");
+        alert('height: ' + video.videoHeight + ' width: ' + video.videoWidth);
+    }
+</script>
+    <video onplay="Videoplay()" id="vid" src="video.mp4" type="video/mp4" controls></video>
 
 <script>
     var video = document.getElementById("vid");
     console.log(video.videoHeight);
-
-    setTimeout(function() {
-        alert('height: ' +video.videoHeight + ' width: ' + video.videoWidth);
-    }, 10000);
 </script>
 </body>
 </html>
