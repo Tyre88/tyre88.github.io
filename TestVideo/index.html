@@ -17,6 +17,10 @@
 <script>
     var video = document.getElementById("vid");
     console.log(video.videoHeight);
+
+    video.onloadeddata = function() {
+        alert('height: ' + video.videoHeight + ' width: ' + video.videoWidth);
+    };
 </script>
 </body>
 </html>
