@@ -73,7 +73,7 @@ var BizUserNotification = new BizFcmNotification();
     BizUserNotification.initialize();
     BizUserNotification.getToken().then(function(token) {
         console.log(token);
-    }).catch(function(err) {
+    }).error(function(err) {
         debugger;
         BizUserNotification.requestPermission().then(function (token) {
             console.log(token);
