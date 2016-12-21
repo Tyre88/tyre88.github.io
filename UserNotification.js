@@ -13,10 +13,12 @@ var BizFcmNotification = function () {
     BizFcmNotification.prototype.initialize = function () {
         firebase.initializeApp(this.config);
         firebaseMessaging = firebase.messaging();
-        firebaseMessaging.onMessage(OnMessage);
+        firebaseMessaging.onMessage(function(payload) {
+            debugger;
+        });
 
         this.isInitialized = true;
-    }
+    };
 
     BizFcmNotification.prototype.requestPermission = function () {
         var promise = jQuery.Deferred();
@@ -29,12 +31,9 @@ var BizFcmNotification = function () {
         firebaseMessaging.requestPermission()
             .then(function () {
                 console.log('Have permission');
-                debugger;
                 tokenPromise = firebaseMessaging.getToken();
 
                 tokenPromise.then(function (token) {
-                    debugger;
-                    console.log(token);
                     promise.resolve(token);
                 });
             })
