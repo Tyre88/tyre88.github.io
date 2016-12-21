@@ -18,7 +18,9 @@ function MessageHandler(payload) {
     const title = payload.data.title;
     const options = {
         body: payload.data.body,
-        icon: payload.data.icon
+        icon: payload.data.icon,
+        tag: payload.data.tag,
+        url: "https://google.com"
     };
     return self.registration.showNotification(title, options);
 }
