@@ -20,7 +20,9 @@ function MessageHandler(payload) {
         body: payload.data.body,
         icon: payload.data.icon,
         tag: payload.data.tag,
-        url: "https://google.com"
+        data: {
+            url: payload.data.url
+        }
     };
     return self.registration.showNotification(title, options);
 }
