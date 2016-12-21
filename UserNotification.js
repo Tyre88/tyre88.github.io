@@ -32,7 +32,17 @@ var BizFcmNotification = function () {
                 tokenPromise = firebaseMessaging.getToken();
 
                 tokenPromise.then(function (token) {
-                    promise.resolve(token);
+
+                    $.ajax({
+                        url: "https://samsungplustest.bizpart.com/WS/BizPartScriptService.asmx/AddPushNotificationId",
+                        type: "POST",
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        data: JSON.stringify({ notificationId: token }),
+                        success: function() {
+                            promise.resolve(token);
+                        }
+                    });
                 });
             })
             .catch(function (err) {
