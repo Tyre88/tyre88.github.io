@@ -13,9 +13,7 @@ var BizFcmNotification = function () {
     BizFcmNotification.prototype.initialize = function () {
         firebase.initializeApp(this.config);
         firebaseMessaging = firebase.messaging();
-        firebaseMessaging.onMessage(function(payload) {
-            debugger;
-        });
+        firebaseMessaging.onMessage(OnMessage);
 
         this.isInitialized = true;
     };
