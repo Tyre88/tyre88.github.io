@@ -1,4 +1,3 @@
-var tokenPromise;
 var BizFcmNotification = function () {
     var firebaseMessaging = undefined;
     this.config = {
@@ -29,12 +28,9 @@ var BizFcmNotification = function () {
         firebaseMessaging.requestPermission()
             .then(function () {
                 console.log('Have permission');
-                tokenPromise = firebaseMessaging.getToken();
-
-                tokenPromise.then(function (token) {
-
+                firebaseMessaging.getToken().then(function (token) {
                     $.ajax({
-                        url: "https://samsungplustest.bizpart.com/WS/BizPartScriptService.asmx/AddPushNotificationId",
+                        url: "/WS/BizPartScriptService.asmx/AddPushNotificationId",
                         type: "POST",
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",
@@ -53,6 +49,19 @@ var BizFcmNotification = function () {
         return promise;
     };
 
+    BizFcmNotification.prototype.getToken = function() {
+        var promise = jQuery.Deferred();
+
+        firebaseMessaging.getToken.then(function(token) {
+            promise.resolve(token);
+        }).catch(function(err) {
+            console.error(err);
+            promise.reject(err);
+        });
+
+        return promise;
+    };
+
     function OnMessage(payload) {
         console.log('onMessage', payload);
     }
@@ -62,9 +71,14 @@ var BizUserNotification = new BizFcmNotification();
 
 (function () {
     BizUserNotification.initialize();
-    BizUserNotification.requestPermission().then(function (token) {
+    BizUserNotification.getToken().then(function(token) {
         console.log(token);
-    });
+    }).catch(function(err) {
+        debugger;
+        BizUserNotification.requestPermission().then(function (token) {
+            console.log(token);
+        });
+    })
 }());
 
 //OLD CODE
