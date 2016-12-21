@@ -52,7 +52,7 @@ var BizFcmNotification = function () {
     BizFcmNotification.prototype.getToken = function() {
         var promise = jQuery.Deferred();
 
-        firebaseMessaging.getToken.then(function(token) {
+        firebaseMessaging.getToken().then(function(token) {
             promise.resolve(token);
         }).catch(function(err) {
             console.error(err);
